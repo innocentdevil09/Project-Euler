@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class Main {
 	private static long primeFactors(long n) {
+		if (n < 0) throw new IllegalArgumentException("Argument must be positive");
 		Stack<Long> stack = new Stack<Long>();
 		long temp = n;
 		if (temp % 2 == 0)
