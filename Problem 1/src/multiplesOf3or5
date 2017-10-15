@@ -1,0 +1,17 @@
+package multiplesOf3or5;
+
+public class Main {
+	private static int sum(int n, int d) {
+		if (n < 0 || d < 0) throw new IllegalArgumentException("Positive arguments are required.");
+		int sum = 0;
+		for (int i = 0; i < n; i++) {
+			if (i % d == 0)
+				sum += i;
+		}
+		return sum;
+	}
+	public static void main(String[] args) {
+		int result = sum(1000, 3) + sum(1000, 5) - sum(1000, 15);
+		System.out.println(result);
+	}
+}
