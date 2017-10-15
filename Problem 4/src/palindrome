@@ -1,0 +1,39 @@
+package palindrome;
+
+public class Main {
+	private static boolean isPalindrome(int n) {
+		if (n < 0) throw new IllegalArgumentException("Argument must be positive");
+		int temp = n;
+		int val = 0;
+		while (temp > 0) {
+			val = (val * 10) + (temp % 10);
+			temp = temp / 10;
+		}
+		return val == n;
+	}
+	private static int highestFactor(int n) {
+		if (n < 0) throw new IllegalArgumentException("Argument must be positive");
+		for (int i = (int) Math.sqrt(n); i > 100; i--) {
+			if (n % i == 0)
+				return i;
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		int max = 999 * 999;
+		int result = 0;
+		for (int i = max; i > 10000; i--) {
+			if (isPalindrome(i)) {
+				int factor1 = highestFactor(i);
+				if (factor1 == 0) continue;
+				int factor2 = i / factor1;
+				if (factor2 > 100 && factor2 < 1000) {
+					System.out.println(factor1 +", "+ factor2);
+					result = i;
+					break;
+				}
+			}
+		}
+		System.out.println(result);
+	}
+}
