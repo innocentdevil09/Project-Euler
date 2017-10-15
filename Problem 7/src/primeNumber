@@ -1,0 +1,28 @@
+package primeNumber;
+
+import java.util.Stack;
+
+public class Main {
+	private static boolean isPrimeNumber(int n) {
+		if (n < 0) throw new IllegalArgumentException();
+		if (n == 1) return false;
+		if (n == 2 || n == 3) return true;
+		if (n % 2 == 0) return false;
+		for (int i = 3; i*i <= n; i+=2) {
+			if (n % i == 0)
+				return false;
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		Stack<Integer> stack = new Stack<Integer>();
+		int i = 2;
+		while (stack.size() < 10001) {
+			if (isPrimeNumber(i))
+				stack.push(new Integer(i));
+			i++;
+		}
+		int result = stack.pop();
+		System.out.println(result);
+	}
+}
