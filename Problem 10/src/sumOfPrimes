@@ -1,0 +1,42 @@
+package sumOfPrimes;
+
+import java.util.ArrayList;
+
+public class Main {
+	private static boolean[] listOfPrimes(int n) {
+		if (n < 0) throw new IllegalArgumentException();
+		boolean[] result = new boolean[n];
+		if (n >= 2)
+			result[2] = true;
+		for (int i = 3; i <= n; i += 2) {
+			result[i] = true;
+		}
+		for (int j = 3; j*j <= n; j += 2) {
+			if (result[j]) {
+				for (int k = j*j; k < n; k += j*2)
+					result[k] = false;
+			}
+		}
+		return result;
+	}
+	private static ArrayList<Integer> arrayOfPrimes(int n) {
+		if (n < 0) throw new IllegalArgumentException();
+		int count = 0;
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		boolean[] primes = listOfPrimes(n);
+		for (boolean p : primes) {
+			if (p) {
+				arr.add(new Integer(count));
+			}
+			count++;
+		}
+		return arr;
+	}
+	public static void main(String[] args) {
+		ArrayList<Integer> result = arrayOfPrimes(2000000);
+		long sum = 0;
+		for (int i : result)
+			sum += i;
+		System.out.println(sum);
+	}
+}
