@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Main {
 	private static boolean[] listOfPrimes(int n) {
 		if (n < 0) throw new IllegalArgumentException();
-		boolean[] result = new boolean[n];
+		boolean[] result = new boolean[n + 1];
 		if (n >= 2)
 			result[2] = true;
 		for (int i = 3; i <= n; i += 2) {
