@@ -1,0 +1,39 @@
+package triangleNumbers;
+
+import java.util.ArrayList;
+
+public class Main {
+	private static int getTriangleNumber(int n) {
+		if (n < 0) throw new IllegalArgumentException();
+		int number = 0;
+		for (int i = 0; i <= n; i++) 
+			number += i;
+		return number;
+	}
+	private static int getDivisorsSize(int n) {
+		if (n < 0) throw new IllegalArgumentException();
+		n = getTriangleNumber(n);
+		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		for (int i = 1; i*i <= n; i++) {
+			if (n % i == 0) {
+				int factor1 = i;
+				int factor2 = n / i;
+				if (factor1 != factor2) {
+					arr.add(factor1);
+					arr.add(factor2);
+				}
+			}
+		}
+		return arr.size();
+	}
+	public static void main(String[] args) {
+		int n = 1;
+		while (true) {
+			if (getDivisorsSize(n) >= 500)
+				break;
+			n++;
+		}
+		System.out.println(getTriangleNumber(n));
+	}
+}
