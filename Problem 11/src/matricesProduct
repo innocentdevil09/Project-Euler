@@ -1,0 +1,76 @@
+package matricesProduct;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class Main {
+	static final int gridSize = 20;
+	static final int[][] matrix = new int[gridSize][gridSize];
+	static final int INTERVAL = 4;
+	
+	private static int rowProduct(int a, int b) {
+		if (!inBounds(a, b + INTERVAL - 1))
+			return -1;
+		int product = 1;
+		for (int i = 0; i < INTERVAL; i++) {
+			product *= matrix[a][b+i];
+		}
+		return product;
+	}
+	private static int colProduct(int a, int b) {
+		if (!inBounds(a + INTERVAL - 1, b))
+			return -1;
+		int product = 1;
+		for (int i = 0; i < INTERVAL; i++) {
+			product *= matrix[a+i][b];
+		}
+		return product;
+	}
+	private static int rightDiagProduct(int a, int b) {
+		if (!inBounds(a + INTERVAL - 1, b + INTERVAL -1))
+			return -1;
+		int product = 1;
+		for (int i = 0; i < INTERVAL; i++) {
+			product *= matrix[a+i][b+i];
+		}
+		return product;
+	}
+	private static int leftDiagProduct(int a, int b) {
+		if (!inBounds(a + (INTERVAL -1), b - (INTERVAL - 1)))
+			return -1;
+		int product = 1;
+		for (int i = 0; i < INTERVAL; i++) {
+			product *= matrix[a+i][b-i];
+		}
+		return product;
+	}
+	private static boolean inBounds(int row, int col) {
+		return (row > 0 && row < gridSize && col > 0 && col < gridSize);
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		File file = new File("F:\\Project Euler\\Problem 11\\File.txt");
+		Scanner sc = new Scanner(file);
+		
+		int row = 0;
+		while (sc.hasNextLine()) {
+			String[] line = sc.nextLine().trim().split("\\s+");
+			for (int col = 0; col < line.length; col++) {
+				matrix[row][col] = Integer.parseInt(line[col]);
+			}
+			row++;
+		}
+		sc.close();
+		
+		int maxProduct = 1;
+		for (int a = 0; a < gridSize - 3; a++) {
+			for (int b = 0; b < gridSize - 3; b++) {
+				maxProduct = Math.max(rowProduct(a, b), maxProduct);
+				maxProduct = Math.max(colProduct(a, b), maxProduct);
+				maxProduct = Math.max(rightDiagProduct(a, b), maxProduct);
+				maxProduct = Math.max(leftDiagProduct(a, b), maxProduct);
+			}
+		}
+		System.out.println(maxProduct);
+	}
+}
