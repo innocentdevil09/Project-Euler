@@ -45,7 +45,7 @@ public class Main {
 		return product;
 	}
 	private static boolean inBounds(int row, int col) {
-		return (row > 0 && row < gridSize && col > 0 && col < gridSize);
+		return (row >= 0 && row < gridSize && col >= 0 && col < gridSize);
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -63,8 +63,8 @@ public class Main {
 		sc.close();
 		
 		int maxProduct = 1;
-		for (int a = 0; a < gridSize - 3; a++) {
-			for (int b = 0; b < gridSize - 3; b++) {
+		for (int a = 0; a < gridSize; a++) {
+			for (int b = 0; b < gridSize; b++) {
 				maxProduct = Math.max(rowProduct(a, b), maxProduct);
 				maxProduct = Math.max(colProduct(a, b), maxProduct);
 				maxProduct = Math.max(rightDiagProduct(a, b), maxProduct);
