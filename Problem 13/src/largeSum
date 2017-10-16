@@ -1,0 +1,66 @@
+package largeSum;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Main {
+//	private static int[] addLargeNumbers(String a, String b) {
+//		String[] line1 = a.split("");
+//		String[] line2 = b.split("");
+//		
+//		int[] num1 = new int[line1.length];
+//		int[] num2 = new int[line2.length];
+//		int[] sum;
+//		
+//		for (int i = 0; i < line1.length; i++) 
+//			num1[i] = Integer.parseInt(line1[i]);
+//		for (int j = 0; j < line2.length; j++)
+//			num2[j] = Integer.parseInt(line2[j]);
+//		
+//		if (num1.length == num2.length) {
+//			sum = new int[num1.length + 3];
+//			int carry = 0, x = num1.length - 1, y = num2.length - 1, z = 0;
+//			for (; x >= 0 && y >= 0; x--, y--, z++) {
+//				sum[z] = (num1[x] + num2[y] + carry) % 10;
+//				carry = (num1[x] + num2[y] + carry) / 10;
+//			}
+//			while (carry > 0) {
+//				sum[z++] = carry % 10;
+//				carry /= 10;
+//			}
+//		} else {
+//			sum = new int[Math.max(num1.length, num2.length) + 2];
+//			int carry = 0, x = num1.length - 1, y = num2.length - 1, z = 0;
+//			for (; x >= 0 && y >= 0; z++) {
+//				sum[z] = (num1[x] + num2[y] + carry) % 10;
+//				carry = (num1[x] + num2[y] + carry) / 10;
+//			}
+//			if (num1.length > num2.length) {
+//				while (x >= 0) {
+//					sum[z++] = (num1[x] + carry) % 10;
+//					carry = (num1[x--] + carry) / 10;
+//				}
+//			} else {
+//				while (y >= 0) {
+//					sum[z++] = (num2[y] + carry) % 10;
+//					carry = (num2[y--] + carry) / 10;
+//				}
+//			}
+//		}
+//		return sum;
+//	}
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		File file = new File("F:\\Project Euler\\Problem 13\\File.txt");
+		Scanner sc = new Scanner(file);
+		
+		BigInteger sum = BigInteger.ZERO;
+		while (sc.hasNextLine()) {
+			String line = sc.nextLine().trim();
+			sum = sum.add(new BigInteger(line));
+		}
+		sc.close();
+		
+		System.out.println(sum.toString().substring(0, 10));
+	}
+}
