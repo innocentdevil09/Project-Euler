@@ -1,0 +1,16 @@
+package powerDigitSum;
+
+import java.math.BigInteger;
+
+public class Main {
+	public static void main(String[] args) {
+		BigInteger val = BigInteger.ONE;
+		for (int i = 1; i <= 1000; i++)
+			val = val.multiply(new BigInteger("2"));
+		String[] line = val.toString().trim().split("");
+		int result = 0;
+		for (String s : line)
+			result += Integer.parseInt(s);
+		System.out.println(result);
+	}
+}
