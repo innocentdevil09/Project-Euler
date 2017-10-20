@@ -1,0 +1,63 @@
+package NumberInWords;
+
+public class Main {
+	private static final String[] numNames = {
+			"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+			"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+			"eighteen", "nineteen"
+	};
+	private static final String[] tenNames = {
+			"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+	};
+	private static final String[] suffixes = {
+			"", "thousand", "million", "billion", "trillion"
+	};
+	private static String getNumberInWords(int n) {
+		String result = "";
+		String prefix = "";
+		if (n < 0) {
+			prefix = "negative";
+			n = -n;
+		}
+			
+		if (n % 100 < 20) {
+			result = numNames[n % 100];
+			n /= 100;
+		} else {
+			result = numNames[n % 10];
+			n /= 10;
+			
+			result = tenNames[n % 10] + result;
+			n/= 10;
+		}
+		if (n == 0) return prefix + result;
+		else if (result.equals("")) {
+			result = numNames[n % 10] + "hundred" + result;
+		} else {
+			result = numNames[n % 10] + "hundredand" + result;
+		}
+		return result;
+	}
+	private static String convert(int n) {
+		if (n == 0) return "zero";
+		String result = "";
+		int index = 0;
+		while (n > 0) {
+			if (n != 0) {
+				String s = getNumberInWords(n % 1000);
+				result = s + suffixes[index] + result;
+			}
+			n /= 1000;
+			index++;
+		}
+		return result;
+	}
+	public static void main(String[] args) {
+		int words = 0;
+		for (int i = 1; i <= 1000; i++) {
+			String line = convert(i).trim();
+			words += line.length();
+		}
+		System.out.println(words);
+	}
+}
