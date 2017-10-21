@@ -1,0 +1,33 @@
+package namesScores;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		File file = new File("F:\\Project Euler\\Problem 22\\p022_names.txt");
+		Scanner sc = new Scanner(file);
+		sc.useDelimiter("[^a-zA-Z]+");
+		
+		ArrayList<String> arr = new ArrayList<String>();
+		while (sc.hasNext()) {
+			arr.add(sc.next());
+		}
+		sc.close();
+		
+		Collections.sort(arr);
+		long sum = 0;
+		int i = 1;
+		for (String s : arr) {
+			int n = 0;
+			char[] words = s.toCharArray();
+			for (char c : words)
+				n += c - 'A' + 1;
+			sum += n * i;
+			i++;
+		}
+		System.out.println(sum);
+	}
+}
