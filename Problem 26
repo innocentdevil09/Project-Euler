@@ -3,7 +3,7 @@ import java.math.RoundingMode;
 
 public class Problem26 {
     /**
-     * Main method to run loop over 1000 digits to get reocurrence length in their decimals, if any
+     * Main method to run loop over 1000 digits to get re-occurrence length in their decimals, if any
      *
      * @param args
      */
