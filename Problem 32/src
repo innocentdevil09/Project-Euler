@@ -1,0 +1,44 @@
+import java.util.HashSet;
+import java.util.Set;
+
+public class Problem32 {
+    /**
+     * Main method to compute all the possible products and check if the the combination is pan-digital
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+        Set<Integer> products = new HashSet<>();
+        for (int i = 1; i < 10000; i++) {
+            for (int j = 1; j <= i; j++) {
+                int product = i * j;
+                String str = "" + i + j + product;
+                if (isPanDigital(str)) {
+                    products.add(product);
+                }
+            }
+        }
+        int[] sum = {0};
+        products.forEach(p -> sum[0] += p);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Sum of products : " + sum[0]);
+        System.out.println("Time taken : " + (endTime - startTime));
+    }
+
+    /**
+     * The given number is passed as a string. For the number to be pan-digital :
+     * 1. its length should be exactly 9
+     * 2. all the digits should appear exactly once
+     *
+     * @param num
+     */
+    private static boolean isPanDigital(String num) {
+        if (num.length() != 9) { return false;}
+        for (char c = '1'; c <= '9'; c++) {
+            if (!num.contains(Character.toString(c))) {return false;}
+        }
+
+        return true;
+    }
+}
