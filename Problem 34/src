@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Problem34 {
+    /**
+     * Variable to store factorials values of all 10 digits
+     */
+    private static int[] factorials = new int[10];
+
+    /**
+     * Main method to get the sum of all numbers, which are equal to the factorial sum of their digits
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+
+        List<Integer> digitFactorials = new ArrayList<>();
+        int sum = 0;
+        for (int i = 3; i < 100000; i++) {
+            if (i == getFactorialSumOfDigits(i)) {
+                sum += i;
+                digitFactorials.add(i);
+            }
+        }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Total number of digit factorials : " + digitFactorials.size());
+        System.out.println("Sum of digit factorials - " + sum);
+        System.out.println("Total time taken - " + (endTime - startTime));
+    }
+
+    /**
+     * Gets the list of individual digits. Sums up their factorials
+     *
+     * @param n
+     */
+    private static int getFactorialSumOfDigits(int n) {
+        int sum = 0;
+        List<Integer> digits = getDigits(n);
+        for (int d : digits) {
+            sum += getFactorial(d);
+        }
+        return sum;
+    }
+
+    /**
+     * Returns the individual digits as a list
+     *
+     * @param n
+     */
+    private static List<Integer> getDigits(int n) {
+        List<Integer> digits = new ArrayList<>();
+        while (n > 0) {
+            int temp = n % 10;
+            digits.add(temp);
+            n /= 10;
+        }
+        return digits;
+    }
+
+    /**
+     * Returns the factorial value of the digit
+     *
+     * @param n
+     */
+    private static int getFactorial(int n) {
+        if (factorials[n] == 0) {
+            if (n == 0) { factorials[n] = 1; }
+            int p = 1;
+            for (int i = 1; i <= n; i++) {
+                p *= i;
+            }
+            factorials[n] = p;
+        }
+        return factorials[n];
+    }
+}
