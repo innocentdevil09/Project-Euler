@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Problem37 {
+    private static Set<Integer> primeNumbers = new HashSet<>();
+
+    /**
+     * Mian method to get truncatable primes. Algo :
+     * 1. Use substring method of String - parse the number into a string and get other numbers by truncating the
+     * characters
+     * 2. Checks if all of them are prime numbers
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+
+        List<Integer> truncPrimes = new ArrayList<>();
+        for (int i = 11; truncPrimes.size() < 11; i++) {
+            if (isPrimeNumber(i)) {
+                String val = String.valueOf(i);
+                for (int j = 1; j < val.length(); j++) {
+                    int temp1 = Integer.parseInt(val.substring(j));
+                    int temp2 = Integer.parseInt(val.substring(0, val.length() - j));
+                    if (!isPrimeNumber(temp1) || !isPrimeNumber(temp2)) { break; }
+                    if (j == val.length() - 1) { truncPrimes.add(i); }
+                }
+            }
+        }
+        int[] sum = {0};
+        truncPrimes.forEach(p -> sum[0] += p);
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("Total sum of truncatable primes - " + sum[0]);
+        System.out.println("Total time taken : " + (endTime - startTime));
+    }
+
+    /**
+     * Checks if a number is a prime number and adds it to the list
+     *
+     * @param n
+     */
+    private static boolean isPrimeNumber(int n) {
+        if (primeNumbers.contains(n)) { return true; }
+        if (n == 2) {
+            primeNumbers.add(n);
+            return true;
+        }
+        if (n < 2 || n % 2 == 0) { return false; }
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) { return false; }
+        }
+        primeNumbers.add(n);
+        return true;
+    }
+}
