@@ -1,0 +1,62 @@
+package triangleWords;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Problem42 {
+
+    public static void main(String[] args) {
+        String dir = "/Users/himanshugupta/";
+        String fileName = "words.txt";
+        int count = 0;
+
+        long startTime = System.currentTimeMillis();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(dir + fileName)));
+            String s = br.readLine();
+            String[] allWords = s.split(",");
+            for (String str : allWords) {
+                if (isTriangleWord(str.replaceAll("\"", ""))) {
+                    count++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Total number of triangle words - " + count);
+        System.out.println("Total time taken - " + (endTime - startTime));
+    }
+
+    /**
+     * Method to check if the sum values of characters in a string makes up a triangle word
+     *
+     * @param s
+     */
+    private static boolean isTriangleWord(String s) {
+        int value = 0;
+        for (char c : s.toLowerCase().toCharArray()) {
+            value += c - 'a' + 1;
+        }
+        return isTriangleNumber(value);
+    }
+
+    /**
+     * Method to check if a number is a triangle number. Algo:
+     * 1. Using Bhattacharya's formula to get roots of the equation - 1/2 * n * (n + 1) = val
+     * 2. b^2 - 4 * a * c must be an integer
+     * 3. root must be odd value to get integer answers
+     *
+     * @param val
+     */
+    private static boolean isTriangleNumber(int val) {
+        double root = Math.sqrt((8 * val) + 1);
+        if (root != (int) root) {
+            return false;
+        }
+        return root % 2 != 0;
+    }
+}
