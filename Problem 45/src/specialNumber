@@ -1,0 +1,61 @@
+package specialNumber;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Problem45 {
+
+    private static List<BigInteger> getTriangleNumbers(long n) {
+        List<BigInteger> result = new ArrayList<>();
+        for (long i = 1; i <= n; i++) {
+            BigInteger val = new BigInteger(String.valueOf(((i + 1) * i) / 2));
+            result.add(val);
+        }
+        return result;
+    }
+
+    private static Set<BigInteger> getPentagonNumbers(long n) {
+        Set<BigInteger> result = new HashSet<>();
+        for (long i = 1; i <= n; i++) {
+            BigInteger val = new BigInteger(String.valueOf((((3 * i) - 1) * i) / 2));
+            result.add(val);
+        }
+        return result;
+    }
+
+    private static Set<BigInteger> getHexagonNumbers(long n) {
+        Set<BigInteger> result = new HashSet<>();
+        for (long i = 1; i <= n; i++) {
+            BigInteger val = new BigInteger(String.valueOf(((2 * i) - 1) * i));
+            result.add(val);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
+
+        long n = 1000000;
+        List<BigInteger> triangleNbrs = getTriangleNumbers(n);
+        Set<BigInteger> pentagonNbrs = getPentagonNumbers(n);
+        Set<BigInteger> hexagonNbrs = getHexagonNumbers(n);
+
+        BigInteger result = BigInteger.ZERO;
+        int index = 0;
+        for (int i = 285; i < triangleNbrs.size(); i++) {
+            BigInteger num = triangleNbrs.get(i);
+            if (pentagonNbrs.contains(num) && hexagonNbrs.contains(num)) {
+                result = num;
+                index = i + 1;
+                break;
+            }
+        }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Next triangle, pentagon & hexagon number - " + result + " found at index " + index);
+        System.out.println("Total time taken - " + (endTime - startTime));
+    }
+}
