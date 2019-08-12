@@ -40,7 +40,7 @@ public class Problem24 {
     private static int findCeiling(int[] nums, int threshold, int start, int end) {
         int ceiling = start;
 
-        for (int i = start + 1; i < end; i++) {
+        for (int i = start; i < end; i++) {
             if (nums[i] > threshold && nums[i] < nums[ceiling]) {
                 ceiling = i;
             }
