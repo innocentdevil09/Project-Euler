@@ -1,9 +1,8 @@
-package recurringCycle;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class Problem26 {
+
     /**
      * Main method to run loop over 1000 digits to get recurrence length in their decimals, if any
      *
@@ -13,7 +12,7 @@ public class Problem26 {
         long startTime = System.currentTimeMillis();
         int result = 0, max = 0;
         for (int i = 2; i < 1000; i++) {
-            BigDecimal num = BigDecimal.ONE.divide(BigDecimal.valueOf(i), 20000, RoundingMode.HALF_UP);
+            BigDecimal num = BigDecimal.ONE.divide(BigDecimal.valueOf(i), 2100, RoundingMode.HALF_UP);
             int val = recurrenceLength(num);
             if (val > max) {
                 max = val;
@@ -41,14 +40,17 @@ public class Problem26 {
             int index = value.indexOf(value.charAt(i), i + 1);
             int nextIndex = value.indexOf(value.charAt(i), index + 1);
             if (index == -1 || nextIndex == -1) { continue; }
+
             int diff = index - i;
+
             while (nextIndex - index < diff) {
                 index = nextIndex;
                 nextIndex = value.indexOf(value.charAt(i), index + 1);
                 if (nextIndex == -1) { break; }
             }
-            if (index + index - i > value.length()) { continue; }
-            if (value.substring(i, index).equals(value.substring(index, index + index - i)) && index - i > result) {
+
+            if (index + index - i < value.length() && index - i > result && value.substring(i, index)
+                    .equals(value.substring(index, index + index - i))) {
                 result = index - i;
             }
         }
