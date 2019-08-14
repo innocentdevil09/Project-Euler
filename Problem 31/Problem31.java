@@ -1,4 +1,5 @@
 public class Problem31 {
+
     private static int[] coins = {1, 2, 5, 10, 20, 50, 100, 200};
     private static final int TOTAL = 200;
 
