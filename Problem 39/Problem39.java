@@ -1,6 +1,5 @@
-package rightTriangles;
-
 public class Problem39 {
+
     /**
      * Method to check if the trio makes a right-angled triangle
      *
