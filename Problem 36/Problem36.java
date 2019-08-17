@@ -1,6 +1,7 @@
 import java.math.BigInteger;
 
 public class Problem36 {
+
     /**
      * Main method to check if the number is palindrome in both base 10 and base 2 values
      *
