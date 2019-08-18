@@ -1,5 +1,3 @@
-package subStringDivisibility;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,11 +62,12 @@ public class Problem43 {
     private static boolean isSubStringDivisible(String s) {
         List<Integer> primeNumbers = Arrays.asList(2, 3, 5, 7, 11, 13, 17);
 
-        boolean b = true;
         for (int i = 0; i < s.length() - 3; i++) {
-            b = b && isDivisible(s, i + 1, i + 2, i + 3, primeNumbers.get(i));
+            if (!isDivisible(s, i + 1, i + 2, i + 3, primeNumbers.get(i))) {
+                return false;
+            }
         }
-        return b;
+        return true;
     }
 
     /**
