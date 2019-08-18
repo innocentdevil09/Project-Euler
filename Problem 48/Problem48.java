@@ -1,5 +1,3 @@
-package selfPowers;
-
 import java.math.BigInteger;
 
 public class Problem48 {
