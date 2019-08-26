@@ -1,5 +1,3 @@
-package com.euler;
-
 import java.util.Arrays;
 
 public class Problem52 {
