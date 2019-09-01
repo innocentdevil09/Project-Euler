@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,19 +7,20 @@ public class Problem60 {
      * Class variables to define the limit of extending the threshold upto which we could find all relevant pairs
      */
     private static final int THRESHOLD = 10000;
-    private static boolean[] primes = new boolean[THRESHOLD + 1];
+    private static final int HUNDRED_MILLION = 100000000;
+    private static boolean[] primes = new boolean[HUNDRED_MILLION + 1];
 
     /**
      * Method to compute all the primes below the threshold limit and save them in boolean array
      */
     private static void listOfPrimes() {
         primes[2] = true;
-        for (int i = 3; i <= THRESHOLD; i += 2) {
+        for (int i = 3; i <= HUNDRED_MILLION; i += 2) {
             primes[i] = true;
         }
-        for (int k = 3; k * k <= THRESHOLD; k += 2) {
+        for (int k = 3; k * k <= HUNDRED_MILLION; k += 2) {
             if (primes[k]) {
-                for (int j = k * k; j <= THRESHOLD; j += 2 * k) {
+                for (int j = k * k; j <= HUNDRED_MILLION; j += 2 * k) {
                     primes[j] = false;
                 }
             }
@@ -92,9 +92,9 @@ public class Problem60 {
      */
     private static boolean isConcatenatingPrime(List<Integer> result, int k) {
         for (int number : result) {
-            BigInteger num1 = new BigInteger("" + k + number);
-            BigInteger num2 = new BigInteger("" + number + k);
-            if (!num1.isProbablePrime(5) || !num2.isProbablePrime(5)) {
+            int num1 = Integer.parseInt("" + k + number);
+            int num2 = Integer.parseInt("" + number + k);
+            if (!primes[num1] || !primes[num2]) {
                 return false;
             }
         }
